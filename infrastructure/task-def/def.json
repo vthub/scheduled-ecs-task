@@ -1,0 +1,18 @@
+[
+  {
+    "name": "${definition_name}",
+    "image": "${image_tag}",
+    "cpu": 64,
+    "memory": 256,
+    "memoryReservation": 128,
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "Options": {
+        "awslogs-region": "${region}",
+        "awslogs-group": "${log_group}",
+        "awslogs-stream-prefix": "${definition_name}"
+      }
+    }
+  }
+]

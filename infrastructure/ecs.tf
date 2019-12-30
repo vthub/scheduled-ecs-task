@@ -58,6 +58,7 @@ resource "aws_security_group" "ecs" {
 resource "aws_cloudwatch_event_rule" "scheduled_task" {
   name                = "${local.service_name}-event-rule"
   schedule_expression = "rate(5 minutes)" // https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+  is_enabled          = false             // Change to true to enable scheduling
 }
 
 resource "aws_cloudwatch_event_target" "scheduled_task" {

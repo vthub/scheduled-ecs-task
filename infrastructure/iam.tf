@@ -85,7 +85,7 @@ resource "aws_iam_role_policy" "scheduled_task_cloudwatch_policy" {
         "ecs:RunTask"
       ],
       "Resource": [
-        "*"
+        "${replace(aws_ecs_task_definition.definition.arn, "/:\\d+$/", ":*")}"
       ]
     },
     {

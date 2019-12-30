@@ -1,7 +1,9 @@
-export AWS_SHARED_CREDENTIALS_FILE="$HOME/.aws/scheduled-ecs-credentials"
+#!/bin/bash
 
-LOGIN=$(aws ecr get-login --no-include-email --region us-west-2)
-eval "$LOGIN"
+export AWS_SHARED_CREDENTIALS_FILE="$HOME/.aws/scheduled-ecs-credentials"
+REPO="$(cat repo)"
+
+eval "$(aws ecr get-login --no-include-email --region us-west-2)"
 docker build -t scheduled-ecs .
-docker tag scheduled-ecs:latest 073540669542.dkr.ecr.us-west-2.amazonaws.com/scheduled-ecs:latest
-docker push 073540669542.dkr.ecr.us-west-2.amazonaws.com/scheduled-ecs:latest
+docker tag scheduled-ecs:latest "$REPO:latest"
+docker push "$REPO:latest"
